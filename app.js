@@ -1,4 +1,10 @@
 const options = {
+    mounted() {
+        const savedRecipes = localStorage.getItem("recipes");
+        if (savedRecipes) {
+            this.recipes = JSON.parse(savedRecipes);
+        }
+    },
     data() {
         return {
             name: "Choucroute",
@@ -39,10 +45,12 @@ const options = {
                 };
 
                 this.recipes.push(recipe);
+                localStorage.setItem("recipes", JSON.stringify(this.recipes));
             }
         },
         deleteTask(id) {
             this.recipes = this.recipes.filter((recipe) => recipe.id != id);
+            localStorage.setItem("recipes", JSON.stringify(this.recipes));
         },
     },
 };
