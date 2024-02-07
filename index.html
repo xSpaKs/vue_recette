@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"
+        />
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
+        <script src="app.js" defer></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>Recettes de cuisine</h1>
+            <p v-if="error" style="color: red">
+                Veuillez afficher tous les champs
+            </p>
+            <p v-if="intError" style="color: red">
+                Les champs Temps (en minutes) et Nombre de personnes doivent
+                être des int
+            </p>
+            <form v-on:submit.prevent="addTask">
+                <div>
+                    <label for="nom">Nom</label>
+                    <input v-model="name" type="text" name="text" required />
+                </div>
+                <div>
+                    <label for="ingredients">Ingrédients</label>
+                    <input
+                        v-model="ingredients"
+                        type="textarea"
+                        name="ingredients"
+                        required
+                    />
+                </div>
+                <div>
+                    <label for="preparation">Préparation</label>
+                    <input
+                        v-model="preparation"
+                        type="textarea"
+                        name="preparation"
+                        required
+                    />
+                </div>
+                <div>
+                    <label for="temps">Temps (en minutes)</label>
+                    <input v-model="time" type="number" name="temps" required />
+                </div>
+                <div>
+                    <label for="nombre">Nombre de personnes</label>
+                    <input
+                        v-model="person"
+                        type="number"
+                        name="nombre"
+                        required
+                    />
+                </div>
+                <input type="submit" value="Ajouter la recette" />
+            </form>
+            <table v-for="recipe in recipes">
+                <caption>
+                    {{recipe.name}}
+                    <button v-on:click="deleteTask(recipe.id)">
+                        Supprimer
+                    </button>
+                </caption>
+                <tbody>
+                    <tr>
+                        <th scope="row">Ingrédients</th>
+                        t
+                        <td>{{recipe.ingredients}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Préparation</th>
+                        t
+                        <td>{{recipe.preparation}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Temps de préparation (en minutes)</th>
+                        t
+                        <td>{{recipe.time}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nombre de personnes</th>
+                        t
+                        <td>{{recipe.person}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
